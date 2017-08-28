@@ -1,0 +1,74 @@
+var _user$project$UserInput$adjustSize = function (_p0) {
+	var _p1 = _p0;
+	var _p2 = (_elm_lang$core$Native_Utils.cmp(
+		_elm_lang$core$String$length(_p1.text),
+		8) < 0) ? {ctor: '_Tuple2', _0: '20em', _1: 'goldenrod'} : {ctor: '_Tuple2', _0: '10em', _1: 'seashell'};
+	var size = _p2._0;
+	var color = _p2._1;
+	return _elm_lang$html$Html_Attributes$style(
+		{
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'fontSize', _1: size},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'color', _1: color},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'fontFamily', _1: 'verdana'},
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$UserInput$update = F2(
+	function (msg, model) {
+		var _p3 = msg;
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{text: _p3._0});
+	});
+var _user$project$UserInput$model = {text: ''};
+var _user$project$UserInput$Model = function (a) {
+	return {text: a};
+};
+var _user$project$UserInput$Text = function (a) {
+	return {ctor: 'Text', _0: a};
+};
+var _user$project$UserInput$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$input,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$placeholder('Type text here'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onInput(_user$project$UserInput$Text),
+						_1: {ctor: '[]'}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _user$project$UserInput$adjustSize(model),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(model.text),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$UserInput$main = _elm_lang$html$Html$beginnerProgram(
+	{model: _user$project$UserInput$model, view: _user$project$UserInput$view, update: _user$project$UserInput$update})();

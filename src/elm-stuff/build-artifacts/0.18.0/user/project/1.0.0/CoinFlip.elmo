@@ -1,0 +1,182 @@
+var _user$project$CoinFlip$getImage = function (model) {
+	var imgURL = _elm_lang$core$Native_Utils.eq(model.side, 'Heads') ? '../images/heads.jpeg' : '../images/tails.jpeg';
+	return _elm_lang$html$Html_Attributes$src(imgURL);
+};
+var _user$project$CoinFlip$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$CoinFlip$generateSide = function (bool) {
+	return bool ? 'Heads' : 'Tails';
+};
+var _user$project$CoinFlip$Model = F2(
+	function (a, b) {
+		return {side: a, number: b};
+	});
+var _user$project$CoinFlip$init = {
+	ctor: '_Tuple2',
+	_0: A2(_user$project$CoinFlip$Model, 'Heads', 0),
+	_1: _elm_lang$core$Platform_Cmd$none
+};
+var _user$project$CoinFlip$GenerateNum = function (a) {
+	return {ctor: 'GenerateNum', _0: a};
+};
+var _user$project$CoinFlip$GetNum = {ctor: 'GetNum'};
+var _user$project$CoinFlip$GenerateFlip = function (a) {
+	return {ctor: 'GenerateFlip', _0: a};
+};
+var _user$project$CoinFlip$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'StartFlip':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: A2(_elm_lang$core$Random$generate, _user$project$CoinFlip$GenerateFlip, _elm_lang$core$Random$bool)
+				};
+			case 'GenerateFlip':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							side: _user$project$CoinFlip$generateSide(_p0._0)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'GetNum':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: A2(
+						_elm_lang$core$Random$generate,
+						_user$project$CoinFlip$GenerateNum,
+						A2(_elm_lang$core$Random$int, 1, 100))
+				};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{number: _p0._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+		}
+	});
+var _user$project$CoinFlip$StartFlip = {ctor: 'StartFlip'};
+var _user$project$CoinFlip$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$style(
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'fontSize', _1: '4em'},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'textAlign', _1: 'center'},
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$img,
+				{
+					ctor: '::',
+					_0: _user$project$CoinFlip$getImage(model),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							{
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'height', _1: '100px'},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'width', _1: '150px'},
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$br,
+					{ctor: '[]'},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(
+						A2(_elm_lang$core$Basics_ops['++'], 'The result is: ', model.side)),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Events$onClick(_user$project$CoinFlip$StartFlip),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Flip!'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											'Random number is: ',
+											_elm_lang$core$Basics$toString(model.number))),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$br,
+											{ctor: '[]'},
+											{ctor: '[]'}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$button,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onClick(_user$project$CoinFlip$GetNum),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Generate number'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+};
+var _user$project$CoinFlip$main = _elm_lang$html$Html$program(
+	{init: _user$project$CoinFlip$init, subscriptions: _user$project$CoinFlip$subscriptions, view: _user$project$CoinFlip$view, update: _user$project$CoinFlip$update})();

@@ -1,0 +1,108 @@
+var _user$project$SocketToMe$socketUrl = 'ws://localhost:8080/connect';
+var _user$project$SocketToMe$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'Input':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{input: _p0._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'SendToSocket':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: A2(_elm_lang$websocket$WebSocket$send, _user$project$SocketToMe$socketUrl, model.input)
+				};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							input: '',
+							messages: {ctor: '::', _0: _p0._0, _1: model.messages}
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+		}
+	});
+var _user$project$SocketToMe$Model = F2(
+	function (a, b) {
+		return {input: a, messages: b};
+	});
+var _user$project$SocketToMe$init = {
+	ctor: '_Tuple2',
+	_0: A2(
+		_user$project$SocketToMe$Model,
+		'',
+		{ctor: '[]'}),
+	_1: _elm_lang$core$Platform_Cmd$none
+};
+var _user$project$SocketToMe$NewMessageReceived = function (a) {
+	return {ctor: 'NewMessageReceived', _0: a};
+};
+var _user$project$SocketToMe$subscriptions = function (model) {
+	return A2(_elm_lang$websocket$WebSocket$listen, _user$project$SocketToMe$socketUrl, _user$project$SocketToMe$NewMessageReceived);
+};
+var _user$project$SocketToMe$SendToSocket = {ctor: 'SendToSocket'};
+var _user$project$SocketToMe$Input = function (a) {
+	return {ctor: 'Input', _0: a};
+};
+var _user$project$SocketToMe$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$ul,
+				{ctor: '[]'},
+				_elm_lang$core$List$reverse(
+					A2(
+						_elm_lang$core$List$map,
+						function (i) {
+							return A2(
+								_elm_lang$html$Html$li,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(i),
+									_1: {ctor: '[]'}
+								});
+						},
+						model.messages))),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$input,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onInput(_user$project$SocketToMe$Input),
+						_1: {ctor: '[]'}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$button,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(_user$project$SocketToMe$SendToSocket),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Send'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$SocketToMe$main = _elm_lang$html$Html$program(
+	{init: _user$project$SocketToMe$init, view: _user$project$SocketToMe$view, subscriptions: _user$project$SocketToMe$subscriptions, update: _user$project$SocketToMe$update})();

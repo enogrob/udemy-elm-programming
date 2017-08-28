@@ -18,9 +18,9 @@ Learn everything you need to about the subject of this `Udemy` project.
 Section: 1
 0 / 3
 Chapter 1: Introduction and Installation
-[ ] 1. Preface 10:36
-[ ] 2. Installing ELM 3:22
-[ ] 3. ELM format in PATH 1:44
+[x] 1. Preface 10:36
+[x] 2. Installing ELM 3:22
+[x] 3. ELM format in PATH 1:44
 
 Section: 2
 0 / 11
